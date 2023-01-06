@@ -1,7 +1,7 @@
 import util from 'util'
 import path from 'path'
 let user = a => '@' + a.split('@')[0]
-function handler(m, { groupMetadata, command, conn, participants }) {
+function handler(m, { groupMetadata, command, conn }) {
 let ps = groupMetadata.participants.map(v => v.id)
 let a = ps.getRandom()
 let b = ps.getRandom()
@@ -28,10 +28,13 @@ let top = `*🌈TOP 10 GAYS/LESBIANAS DEL GRUPO🌈*
 *_8.- ${user(h)}_*
 *_9.- ${user(i)}_*
 *_10.- ${user(j)}_*`
-m.reply(top, null, { mentions: [a, b, c, d, e, f, g, h, i, j]})
-conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted: m })    
-//conn.sendFile(m.chat, vn, 'error.mp3', null, m, true, { type: 'audioMessage', ptt: true })
-}
+m.reply(top, null, {
+contextInfo: {
+mentionedJid: [a, b, c, d, e, f, g, h, i, j]
+}})
+conn.sendFile(m.chat, vn, 'error.mp3', null, m, true, {
+type: 'audioMessage', 
+ptt: true })}
     
 if (command == 'topotakus') {
 let vn = './media/otaku.mp3'
@@ -47,10 +50,15 @@ let top = `*🌸 TOP 10 OTAKUS DEL GRUPO 🌸*
 *_8.- ${user(h)}_*
 *_9.- ${user(i)}_*
 *_10.- ${user(j)}_*`
-m.reply(top, null, { mentions: [a, b, c, d, e, f, g, h, i, j]})
-conn.sendMessage(m.chat, { audio: { url: vn }, fileName: 'error.mp3', mimetype: 'audio/mp4', ptt: true }, { quoted: m })        
-//conn.sendFile(m.chat, vn, 'otaku.mp3', null, m, true, { type: 'audioMessage', ptt: true })
-}}
+m.reply(top, null, {
+contextInfo: {
+mentionedJid: [a, b, c, d, e, f, g, h, i, j]
+}})
+conn.sendFile(m.chat, vn, 'otaku.mp3', null, m, true, {
+type: 'audioMessage', 
+ptt: true 
+})}    
+}
 handler.help = handler.command = ['topgays','topotakus']
 handler.tags = ['games']
 handler.group = true
